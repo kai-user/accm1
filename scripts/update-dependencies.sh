@@ -56,5 +56,5 @@ glide update
 # A second round, this minimizes package in 'glide.lock'
 glide update --strip-vendor
 # Clean up, turn on use-lock-file, otherwise test dependencies are removed
-glide-vc --use-lock-file --only-code --no-tests
+glide-vc --use-lock-file --only-code --no-tests > /dev/null
  

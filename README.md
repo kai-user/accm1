@@ -1,5 +1,8 @@
 # Kubernetes azure-cloud-controller-manager
 
+## Status
+Currently the directory 'pkg/azureprovider' is periodically synced from [Kubernetes upstream directory](https://github.com/kubernetes/kubernetes/tree/master/pkg/cloudprovider/providers/azure). If you have Kubernetes Azure cloud provider related change, please go to [Kubernetes upstream](https://github.com/kubernetes/kubernetes).The upstream directory will be moved here after issue [Standalone Azure cloud provider](https://github.com/kubernetes/kubernetes/issues/50752) is done.
+
 ## Overview
 `Kubernetes azure-cloud-controller-manager` is a Kubernetes component that supports interoperability with Azure cloud platform. It runs together with other master components to provide the Kubernetes cluster’s control plane.
 
@@ -14,7 +17,7 @@ We also recommend using [acs-engine](https://github.com/Azure/acs-engine) to dep
 
 ## Development
 Prerequisions:
-- [golang](https://golang.org/doc/install) (Recommended version: 1.8.3)
+- [golang](https://golang.org/doc/install) (Recommended version: see [component-versioning](docs/component-versioning.md))
 
 Build project:
 ```

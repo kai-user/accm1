@@ -1,5 +1,6 @@
-bin/
-staging_deps/
-testResults/
 .glide/
 .pkg_config
+bin/
+obj/
+staging_deps/
+testResults/

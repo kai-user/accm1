@@ -1,0 +1,20 @@
+language: go
+go_import_path: github.com/Azure/kubernetes-azure-cloud-controller-manager
+go:
+  - 1.9.1
+env:
+  - TEST_SUITE='all test-unit'
+  - TEST_SUITE='test-lint-prepare test-lint'
+  - TEST_SUITE='test-update'
+script:
+  - |
+    if [ "$TEST_SUITE" == "test-update" ]; then
+      if [ "$TRAVIS_PULL_REQUEST" != "false" ] && [ "$TRAVIS_COMMIT_RANGE" ]; then
+        git diff --name-only $TRAVIS_COMMIT_RANGE | grep -qE '^(vendor|glide)' || {
+          echo "Skip update tests"
+          exit
+        }
+      fi
+    fi
+  - make $TEST_SUITE
+
