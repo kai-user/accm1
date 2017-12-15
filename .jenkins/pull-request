@@ -37,7 +37,7 @@ pipeline {
             steps {
                 withDockerContainer ([image: "${env.TEST_IMAGE}"]) {
                     withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'azure_sp', usernameVariable: 'K8S_AZURE_SPID', passwordVariable: 'K8S_AZURE_SPSEC']]) {
-                        sh "${env.K8S_AZURE_CMD} -ctype=default"
+                        sh "${env.K8S_AZURE_CMD} -ctype=smoke"
                     }
                 }
             }
