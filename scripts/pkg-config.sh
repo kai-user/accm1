@@ -19,6 +19,6 @@ cd $(dirname "$BASH_SOURCE")/..
 
 VERSION_PKG=github.com/Azure/kubernetes-azure-cloud-controller-manager/pkg/version
 LDFLAGS="-s -w"
-LDFLAGS="$LDFLAGS -X $VERSION_PKG.version=$(git describe --abbrev=9 || echo unknown)"
+LDFLAGS="$LDFLAGS -X $VERSION_PKG.version=$(git describe --abbrev=9 || echo)"
 LDFLAGS="$LDFLAGS -X $VERSION_PKG.buildDate=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 echo -ldflags \'$LDFLAGS\'

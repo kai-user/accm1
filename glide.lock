@@ -1,8 +1,8 @@
-hash: 70dfbc7e219f5832234bc81be3d17ab6659b09da10c46424f15ee094a2b0a4c3
-updated: 2017-10-10T15:40:54.395022521+08:00
+hash: 727afb69e4f81bca31691c343bb3031f44f5fbfef41958a5aa13aba4ebb1ce97
+updated: 2017-12-13T14:44:21.460515179+08:00
 imports:
 - name: github.com/Azure/azure-sdk-for-go
-  version: 2629e2dfcfeab50896230140542c3b9d89b35ae1
+  version: 509eea43b93cec2f3f17acbe2578ef58703923f8
   subpackages:
   - arm/compute
   - arm/disk
@@ -10,7 +10,7 @@ imports:
   - arm/storage
   - storage
 - name: github.com/Azure/go-autorest
-  version: 58f6f26e200fa5dfb40c9cd1c83f3e2c860d779d
+  version: e14a70c556c8e0db173358d1a903dca345a8e75e
   subpackages:
   - autorest
   - autorest/adal
@@ -37,8 +37,6 @@ imports:
   version: ff4f55a206334ef123e4f79bbf348980da81ca46
   subpackages:
   - log
-- name: github.com/emicklei/go-restful-swagger12
-  version: dcef7f55730566d41eae5db10e7d6981829720f6
 - name: github.com/ghodss/yaml
   version: 73d445a93680fa1a78ae23a5839bad48f32ba1ee
 - name: github.com/go-openapi/jsonpointer
@@ -46,9 +44,9 @@ imports:
 - name: github.com/go-openapi/jsonreference
   version: 13c6e3589ad90f49bd3e3bbe2c2cb3d7a4142272
 - name: github.com/go-openapi/spec
-  version: 6aced65f8501fe1217321abf0749d354824ba2ff
+  version: 7abd5745472fff5eb3685386d5fb8bf38683154d
 - name: github.com/go-openapi/swag
-  version: 1d0bd113de87027671077d3c71eb3ac5d7dbba72
+  version: f3f9494671f93fcff853e3c6e9e948b3eb71e590
 - name: github.com/gogo/protobuf
   version: c0656edd0d9eab7c66d1eb0c568f9039345796f7
   subpackages:
@@ -61,13 +59,14 @@ imports:
   subpackages:
   - lru
 - name: github.com/golang/protobuf
-  version: 4bd1920723d7b7c925de087aa32e2187708897f7
+  version: 1643683e1b54a9e88ad26d98f81400c8c9d9f4f9
   subpackages:
   - jsonpb
   - proto
   - ptypes
   - ptypes/any
   - ptypes/duration
+  - ptypes/struct
   - ptypes/timestamp
 - name: github.com/google/btree
   version: 7d79101e329e5a3adf994758c578dab82b90c017
@@ -98,7 +97,7 @@ imports:
 - name: github.com/juju/ratelimit
   version: 5b9ff866471762aa2ab2dced63c9fb6f53921342
 - name: github.com/mailru/easyjson
-  version: d5b7844b561a7bc640052f1b935f7b800330d7e0
+  version: 2f5df55504ebc322e4d52d34df6a1f5b503bf26d
   subpackages:
   - buffer
   - jlexer
@@ -170,7 +169,7 @@ imports:
   - trace
   - websocket
 - name: golang.org/x/sys
-  version: 7ddbeae9ae08c6a06a59597f0c9edbc5ff2444ce
+  version: 95c6576299259db960f6c5b9b69ea52422860fce
   subpackages:
   - unix
   - windows
@@ -193,9 +192,10 @@ imports:
 - name: gopkg.in/yaml.v2
   version: 53feefa2559fb8dfa8d81baad31be332c97d6c77
 - name: k8s.io/api
-  version: ebe438721917240038ff1d3bf43a9d15b96f841b
+  version: c5e9303c6e6bd22a1cc32d704cf3aad13b0a6544
   subpackages:
   - admissionregistration/v1alpha1
+  - apps/v1
   - apps/v1beta1
   - apps/v1beta2
   - authentication/v1
@@ -218,13 +218,14 @@ imports:
   - scheduling/v1alpha1
   - settings/v1alpha1
   - storage/v1
+  - storage/v1alpha1
   - storage/v1beta1
 - name: k8s.io/apiextensions-apiserver
-  version: 380c53df099b0508178423c040c2bde006d78943
+  version: 7b076e300d8d0cf19513802fa0ef93c534d0d939
   subpackages:
   - pkg/features
 - name: k8s.io/apimachinery
-  version: 029bfa3c6ef963c346c4d43b5bd929303778fba5
+  version: 8a27d2447246642707e9e44e6f48a7c28a0a0a2e
   subpackages:
   - pkg/api/equality
   - pkg/api/errors
@@ -263,7 +264,6 @@ imports:
   - pkg/util/json
   - pkg/util/mergepatch
   - pkg/util/net
-  - pkg/util/rand
   - pkg/util/runtime
   - pkg/util/sets
   - pkg/util/strategicpatch
@@ -276,7 +276,7 @@ imports:
   - third_party/forked/golang/json
   - third_party/forked/golang/reflect
 - name: k8s.io/apiserver
-  version: 26d43272299eba539e1ede38f0f3b5081e8c6fef
+  version: c80e79e56fedef4176a063ff10f8de0ed281c5bc
   subpackages:
   - pkg/authentication/authenticator
   - pkg/authentication/serviceaccount
@@ -287,13 +287,14 @@ imports:
   - pkg/util/flag
   - pkg/util/logs
 - name: k8s.io/client-go
-  version: d055a4172adeb3dee3045730352fc0ff79bdfd95
+  version: 6f05a6a442221cf5ff2f1d1a7f58c9895fb59b67
   subpackages:
   - discovery
   - informers
   - informers/admissionregistration
   - informers/admissionregistration/v1alpha1
   - informers/apps
+  - informers/apps/v1
   - informers/apps/v1beta1
   - informers/apps/v1beta2
   - informers/autoscaling
@@ -324,10 +325,12 @@ imports:
   - informers/settings/v1alpha1
   - informers/storage
   - informers/storage/v1
+  - informers/storage/v1alpha1
   - informers/storage/v1beta1
   - kubernetes
   - kubernetes/scheme
   - kubernetes/typed/admissionregistration/v1alpha1
+  - kubernetes/typed/apps/v1
   - kubernetes/typed/apps/v1beta1
   - kubernetes/typed/apps/v1beta2
   - kubernetes/typed/authentication/v1
@@ -350,8 +353,10 @@ imports:
   - kubernetes/typed/scheduling/v1alpha1
   - kubernetes/typed/settings/v1alpha1
   - kubernetes/typed/storage/v1
+  - kubernetes/typed/storage/v1alpha1
   - kubernetes/typed/storage/v1beta1
   - listers/admissionregistration/v1alpha1
+  - listers/apps/v1
   - listers/apps/v1beta1
   - listers/apps/v1beta2
   - listers/autoscaling/v1
@@ -370,6 +375,7 @@ imports:
   - listers/scheduling/v1alpha1
   - listers/settings/v1alpha1
   - listers/storage/v1
+  - listers/storage/v1alpha1
   - listers/storage/v1beta1
   - pkg/version
   - rest
@@ -387,6 +393,7 @@ imports:
   - tools/record
   - tools/reference
   - transport
+  - util/buffer
   - util/cert
   - util/flowcontrol
   - util/homedir
@@ -394,30 +401,30 @@ imports:
   - util/retry
   - util/workqueue
 - name: k8s.io/kube-openapi
-  version: 868f2f29720b192240e18284659231b440f9cda5
+  version: 39a7bf85c140f972372c2a0d1ee40adbf0c8bfe1
   subpackages:
   - pkg/builder
   - pkg/common
   - pkg/handler
   - pkg/util
 - name: k8s.io/kubernetes
-  version: 0b9efaeb34a2fc51ff8e4d34ad9bc6375459c4a4
+  version: e7258eecaa6724415f29d59102059fe2cdbcd6e6
   subpackages:
   - cmd/cloud-controller-manager/app
   - cmd/cloud-controller-manager/app/options
-  - cmd/kubeadm/app/constants
-  - pkg/api
-  - pkg/api/helper
-  - pkg/api/install
+  - pkg/api/legacyscheme
   - pkg/api/service
-  - pkg/api/util
-  - pkg/api/v1
-  - pkg/api/v1/helper
   - pkg/api/v1/node
   - pkg/api/v1/pod
   - pkg/api/v1/service
-  - pkg/api/validation
+  - pkg/apis/autoscaling
   - pkg/apis/componentconfig
+  - pkg/apis/core
+  - pkg/apis/core/helper
+  - pkg/apis/core/install
+  - pkg/apis/core/v1
+  - pkg/apis/core/v1/helper
+  - pkg/apis/core/validation
   - pkg/apis/extensions
   - pkg/apis/networking
   - pkg/apis/scheduling
@@ -442,10 +449,10 @@ imports:
   - pkg/util/mount
   - pkg/util/net/sets
   - pkg/util/node
+  - pkg/util/nsenter
   - pkg/util/parsers
   - pkg/util/pointer
   - pkg/util/taints
-  - pkg/util/version
   - pkg/version
   - pkg/volume
   - pkg/volume/util

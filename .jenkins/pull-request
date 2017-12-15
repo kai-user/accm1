@@ -1,0 +1,60 @@
+pipeline {
+    agent any
+    options {
+        timeout(time: 100, unit: 'MINUTES') 
+    }
+    environment {
+        TEST_IMAGE = "$JOB_NAME:$BUILD_NUMBER"
+        ARTIFACTS_DIR = '_artifacts.kai'
+    }
+    stages {
+        stage ('test run image') {
+            steps {
+                sh "docker build test/k8s-azure -t $TEST_IMAGE"
+            }
+        }
+        stage ('production image') {
+            steps {
+                sh 'make clean image'
+                withDockerRegistry([credentialsId: 'azure_sp', url: "https://${env.K8S_AZURE_IMAGE_REPOSITORY}"]) {
+                    sh 'docker push $(scripts/image-tag.sh)'
+                }
+            }
+        }
+        stage ('Clean up') {
+            steps {
+                sh 'rm -rf $ARTIFACTS_DIR *.xml'
+            }
+        }
+        stage('E2E Test') {
+            environment {
+                K8S_AZURE_CMD = 'k8s-azure e2e -v -caccm_image=$($WORKSPACE/scripts/image-tag.sh)'
+                K8S_AZURE_workspace = "${ARTIFACTS_DIR}"
+                K8S_AZURE_skipclean = 0
+                K8S_AZURE_global_skip_files = "$WORKSPACE/.jenkins/skip.txt"
+                K8S_AZURE_subject = "${TEST_IMAGE}_PR${ghprbPullId}"
+            }
+            steps {
+                withDockerContainer ([image: "${env.TEST_IMAGE}"]) {
+                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'azure_sp', usernameVariable: 'K8S_AZURE_SPID', passwordVariable: 'K8S_AZURE_SPSEC']]) {
+                        sh "${env.K8S_AZURE_CMD} -ctype=default"
+                    }
+                }
+            }
+        }
+        stage('Collect') {
+            steps {
+                withDockerContainer ([image: "${env.TEST_IMAGE}"]) {
+                    sh 'cd $ARTIFACTS_DIR && K8S_AZURE_REPORT_DIRS=\$(echo */report) k8s-azure junit_combine'
+                    sh 'cp $ARTIFACTS_DIR/result.xml $ghprbActualCommit.xml'
+                    azureUpload storageCredentialId: 'report', storageType: 'blobstorage', containerName: 'prs', filesPath: "${env.ghprbActualCommit}.xml", fileShareName: ''
+                }
+             }
+            post {
+                always {
+                    junit "${env.ARTIFACTS_DIR}/result.xml"
+                }
+            }
+        }
+    }
+}

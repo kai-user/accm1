@@ -22,7 +22,7 @@ import (
 	"testing"
 )
 
-func TestBasic(t *testing.T) {
+func TestVersionNotEmpty(t *testing.T) {
 	info := getInfo()
-	assert.NotEmpty(t, info.GoVersion)
+	assert.NotEmpty(t, info.Version)
 }

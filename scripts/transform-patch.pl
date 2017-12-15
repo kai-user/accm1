@@ -18,9 +18,11 @@ use 5.012;
 
 state $skip = 0;
 if (m#^diff --git a/(.*) .*$#) {
-    $skip = ($1 !~ m#^pkg/cloudprovider/providers/azure/#);
-    print STDERR "# skipping file $1\n" if $skip;
+    my $file = $1;
+    $skip = ($file !~ m#^pkg/cloudprovider/providers/azure/#) || ($file =~ /BUILD$/);
+    print STDERR "# skipping file $file\n" if $skip;
 }
 next if $skip;
 
+s#package azure\K#provider#;
 print s#/cloudprovider/providers/azure/#/azureprovider/#gr;

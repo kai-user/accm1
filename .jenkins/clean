@@ -1,0 +1,15 @@
+pipeline {
+    agent { dockerfile { dir 'test/k8s-azure/kautil' } }
+    stages {
+        stage('clean') {
+            environment {
+                K8S_AZURE_CLEANUP_TIMEOUT = '2:00'
+            }
+            steps {
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'azure_sp', usernameVariable: 'K8S_AZURE_SPID', passwordVariable: 'K8S_AZURE_SPSEC']]) {
+                    sh '/build/publish/kautil clean'
+                }
+            }
+        }
+    }
+}

@@ -14,6 +14,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-TAG=azure-cloud-controller-manager:$(git rev-parse --short=7 HEAD)
-[ -z "$K8S_AZURE_IMAGE_REPOSITORY" ] || TAG=$K8S_AZURE_IMAGE_REPOSITORY/$TAG
-echo $TAG
+[ -z $1 ] && { echo "$0 <tag> [head]" ; exit 1; }
+git tag -a $1 -m "Release $1" $2
